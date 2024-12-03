@@ -69,9 +69,13 @@ const io = new Server(server, {
 require("dotenv").config();
 
 // Middleware
-app.use(cors({ 
-  origin: "http://localhost:3000", 
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests only from localhost:3000
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(bodyParser.json());
 
 // Connect to MongoDB
