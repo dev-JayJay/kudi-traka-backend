@@ -17,6 +17,7 @@
     "kudi-traka-backend": "file:../kudi-traka-backend",
     "mongoose": "^8.8.3",
     "nodemon": "^3.1.7",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   }
 }

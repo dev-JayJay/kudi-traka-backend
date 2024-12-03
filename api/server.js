@@ -61,37 +61,26 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://kudi-traka.vercel.app'], // Allow both origins
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'], 
   },
 });
-// Allow both origins https://kudi-traka.vercel.app
 require("dotenv").config();
 
 // Middleware
-app.use(
-  cors({
-    origin: "http://localhost:3000", 
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-// Allow requests only from localhost:3000
+app.use(cors({ 
+  origin: ["http://localhost:3000", "https://kudi-traka.vercel.app"] 
+}));
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const connectDB = () => {
+const connectDB = async () => {
   try {
     const dbUri = process.env.MONGO_URI;
     console.log("Connecting to MongoDB...");
-     mongoose.connect(dbUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 60000,
-     });
+    await mongoose.connect(dbUri);
     console.log("mongoose connected");
-    // updated node version to solove the mongo connecction
   } catch (error) {
     console.error("mongoose did not connect", error);
     process.exit(1);
@@ -140,7 +129,7 @@ io.on("connection", (socket) => {
       const newMessage = new Message({
         text: message,
         sender: "user",
-        recipient: "admin", 
+        recipient: "admin",
       });
       await newMessage.save();
 
@@ -192,15 +181,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-
-app.get('/', (req, res) => {
-  res.status(200).send('server is runing on forward slash and set mongo IP to anywhere');
-  console.log(`checking the check`);
-})
-app.get('/check', (req, res) => {
-  res.status(200).send('server is runing on this url');
-  console.log(`checking the check`);
-})
 
 server.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
