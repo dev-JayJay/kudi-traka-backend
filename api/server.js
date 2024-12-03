@@ -85,6 +85,7 @@ const connectDB = () => {
       serverSelectionTimeoutMS: 60000,
      });
     console.log("mongoose connected");
+    // updated node version to solove the mongo connecction
   } catch (error) {
     console.error("mongoose did not connect", error);
     process.exit(1);
