@@ -182,6 +182,10 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.status(200).send('server is runing on forward slash');
+  console.log(`checking the check`);
+})
 app.get('/check', (req, res) => {
   res.status(200).send('server is runing on this url');
   console.log(`checking the check`);
