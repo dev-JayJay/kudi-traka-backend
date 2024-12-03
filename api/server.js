@@ -64,13 +64,16 @@ const io = new Server(server, {
     origin: ['http://localhost:3000', 'https://kudi-traka.vercel.app'], // Allow both origins
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'], 
+    credentials: true
   },
 });
 require("dotenv").config();
 
 // Middleware
 app.use(cors({ 
-  origin: ["http://localhost:3000", "https://kudi-traka.vercel.app"] 
+  origin: ["http://localhost:3000", "https://kudi-traka.vercel.app"],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
 }));
 app.use(bodyParser.json());
 
