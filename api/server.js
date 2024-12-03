@@ -183,7 +183,7 @@ io.on("connection", (socket) => {
 });
 
 app.get('/', (req, res) => {
-  res.status(200).send('server is runing on forward slash');
+  res.status(200).send('server is runing on forward slash and set mongo IP to anywhere');
   console.log(`checking the check`);
 })
 app.get('/check', (req, res) => {
