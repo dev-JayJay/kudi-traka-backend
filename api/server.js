@@ -75,11 +75,11 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const connectDB = async () => {
+const connectDB = () => {
   try {
     const dbUri = process.env.MONGO_URI;
     console.log("Connecting to MongoDB...");
-    await mongoose.connect(dbUri);
+     mongoose.connect(dbUri);
     console.log("mongoose connected");
   } catch (error) {
     console.error("mongoose did not connect", error);
