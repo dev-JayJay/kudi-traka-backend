@@ -129,7 +129,7 @@ io.on("connection", (socket) => {
       const newMessage = new Message({
         text: message,
         sender: "user",
-        recipient: "admin",
+        recipient: "admin", 
       });
       await newMessage.save();
 
@@ -181,6 +181,11 @@ io.on("connection", (socket) => {
     }
   });
 });
+
+app.get('/check', (req, res) => {
+  res.status(200).send('server is runing on this url');
+  console.log(`checking the check`);
+})
 
 server.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
