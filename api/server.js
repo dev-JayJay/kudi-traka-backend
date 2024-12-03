@@ -79,7 +79,11 @@ const connectDB = () => {
   try {
     const dbUri = process.env.MONGO_URI;
     console.log("Connecting to MongoDB...");
-     mongoose.connect(dbUri);
+     mongoose.connect(dbUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 60000,
+     });
     console.log("mongoose connected");
   } catch (error) {
     console.error("mongoose did not connect", error);
