@@ -84,7 +84,7 @@ const io = new Server(server, {
     allowedHeaders: ["Content-Type"],
     credentials: true,
   },
-  transports: ['websocket'],  // Enforce WebSocket transport
+  transports: ['websocket', 'polling'],  // Enforce WebSocket transport
 });
 require("dotenv").config();
 
