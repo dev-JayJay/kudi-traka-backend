@@ -77,13 +77,14 @@ app.use(cors(corsOptions));
 const io = new Server(server, {
   cors: {
     origin: [
-      "https://kudi-traka.vercel.app",
-      "http://localhost:3000",
+      "https://kudi-traka.vercel.app",  // Production URL
+      "http://localhost:3000",           // Development URL
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
   },
+  transports: ['websocket'],  // Enforce WebSocket transport
 });
 require("dotenv").config();
 
