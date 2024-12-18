@@ -60,21 +60,29 @@ const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 
-// CORS configuration for both Express and Socket.IO
-app.use(cors({ 
-  origin: ["https://kudi-traka.vercel.app", 'http://localhost:3000'],
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+const corsOptions = {
+  origin: [
+    "https://kudi-traka.vercel.app",  // Production URL
+    "http://localhost:3000",           // Development URL
+  ],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
   credentials: true,
-}));
+};
 
-// Initialize Socket.IO with CORS options
+// Enable CORS for the Express server
+app.use(cors(corsOptions));
+
+// Initialize Socket.IO with the same CORS options
 const io = new Server(server, {
   cors: {
-    origin: ['https://kudi-traka.vercel.app', 'http://localhost:3000'],
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true
+    origin: [
+      "https://kudi-traka.vercel.app",
+      "http://localhost:3000",
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
   },
 });
 require("dotenv").config();
@@ -191,13 +199,13 @@ io.on("connection", (socket) => {
 });
 
 app.get('/', (req, res) => {
-  res.status(200).send('server is running on forward slash and set mongo IP to anywhere');
+  res.status(200).send('server is runing on forward slash and set mongo IP to anywhere');
   console.log(`checking the check`);
-});
+})
 app.get('/check', (req, res) => {
-  res.status(200).send('server is running on this url');
+  res.status(200).send('server is runing on this url');
   console.log(`checking the check`);
-});
+})
 
 server.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
