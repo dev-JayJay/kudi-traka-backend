@@ -61,7 +61,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://kudi-traka.vercel.app',
+    origin: ['https://kudi-traka.vercel.app', 'http://localhost:3000'],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'], 
     credentials: true
@@ -71,9 +71,10 @@ require("dotenv").config();
 
 // Middleware
 app.use(cors({ 
-  origin: "https://kudi-traka.vercel.app",
+  origin: ["https://kudi-traka.vercel.app", 'http://localhost:3000'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
+  credentials: true,
 }));
 app.use(bodyParser.json());
 
