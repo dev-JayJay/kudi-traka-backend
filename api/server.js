@@ -7,6 +7,15 @@ app.use(express.json());
 
 let transactions = [];
 
+app.get('/', (req, res) => {
+  res.status(200).send('server is runing on forward slash and set mongo IP to anywhere');
+  console.log(`checking the check`);
+})
+app.get('/check', (req, res) => {
+  res.status(200).send('server is runing on this url');
+  console.log(`checking the check`);
+})
+
 app.post('/save-transaction', (req, res) => {
   const { text } = req.body;
 
